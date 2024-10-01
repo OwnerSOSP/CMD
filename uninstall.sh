@@ -1,5 +1,5 @@
 (echo "\n   ______________________________________\n  /                                      \ \n  ========================================\n  $(getprop ro.product.brand) ($(getprop ro.product.model)) tweaker\n  ========================================\n  hardware       : $(case $(getprop ro.hardware|tr [:upper:] [:lower:]) in mt*) echo mediatek;;apq*|msm*|qcom*|sd*|sm*) echo qualcomm;;exynos*|s5e*|universal*) echo samsung;;gs*|tensor*) echo google;;hi*|kirin*) echo hisilicon;;sc*|t*|ums*|unisoc*) echo unisoc;;*) echo unknown;;esac) ($(getprop ro.hardware))\n  software       : android ($(getprop ro.build.version.release))\n  ========================================\n  wait about 1 minutes until successful\n  ========================================\n  \                                      /\n   ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\n")|tr '[:lower:]' '[:upper:]'
-(for a in $(cmd package list packages|grep -Ei "$ip"|cut -f2 -d:)
+(for a in $(cmd package list packages|cut -f2 -d:)
 do cmd appops reset "$a"&done
 for b in $(cmd device_config list|cut -f1 -d=)
 do cmd device_config delete "${b%/*}" "${b#*/}"&done
